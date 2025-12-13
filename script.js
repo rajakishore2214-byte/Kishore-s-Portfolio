@@ -52,17 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
         ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .contact form', { origin: 'bottom' });
         ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
         ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
+
+        /* Clients Pop Effect */
+        ScrollReveal().reveal('.client-box', {
+            origin: 'bottom',
+            interval: 200,
+            distance: '100px',
+            scale: 0.85,
+            easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' /* Back-out/Pop easing */
+        });
     }
 
     /* Typed JS */
     if (typeof Typed !== 'undefined') {
-        const typed = new Typed('.multiple-text', {
-            strings: ['Lead Generation Specialist', 'SEO Executive', 'Web Developer'],
-            typeSpeed: 100,
-            backSpeed: 100,
-            backDelay: 1000,
-            loop: true
-        });
+        /* Clients Marquee Optimization */
+        const clientsTrack = document.querySelector('.clients-track');
+        if (clientsTrack) {
+            const clientContent = clientsTrack.innerHTML;
+            clientsTrack.innerHTML += clientContent + clientContent; // Triplicate for seamless loop
+        }
+
+        const multipleText = document.querySelector('.multiple-text');
+        if (multipleText) {
+            const typed = new Typed('.multiple-text', {
+                strings: ['Digital Marketer', 'SEO Strategist', 'Performance Marketer', 'Growth Hacker'],
+                typeSpeed: 100,
+                backSpeed: 100,
+                backDelay: 1000,
+                loop: true
+            });
+        }
     }
 
     /* Custom Cursor */

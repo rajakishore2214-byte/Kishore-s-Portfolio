@@ -1,11 +1,16 @@
 :root {
-    --bg-color: #0f0f1a;
-    /* Deep dark blue/black */
-    --second-bg-color: #1a1a2e;
-    --text-color: #ededed;
-    --main-color: #00e5ff;
-    /* Cyan accent */
-    --hover-color: #00b8cc;
+    --bg-color: #FFFFFF;
+    /* 60% Dominant: Clean White */
+    --second-bg-color: #F4F6F8;
+    /* Light Grey for section separation */
+    --text-color: #1A2A3A;
+    /* 30% Secondary: Deep Charcoal Blue */
+    --main-color: #6366F1;
+    /* 10% Accent: Aesthetic Indigo */
+    --hover-color: #4F46E5;
+    /* Darker Indigo for Hover */
+    --glass-bg: rgba(26, 42, 58, 0.05);
+    /* Subtle dark glass */
     --font-primary: 'Outfit', sans-serif;
     --font-secondary: 'Space Grotesk', sans-serif;
 }
@@ -29,33 +34,15 @@ body {
     background: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-primary);
-    cursor: none;
-    /* Custom cursor */
+    cursor: default;
+    /* Reverting to default cursor for simplicity */
 }
 
-/* Custom Cursor */
+/* Custom Cursor - Optional, kept simple or can be removed if strictly flat */
 .cursor-dot,
 .cursor-outline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--main-color);
-}
-
-.cursor-outline {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--main-color);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    display: none;
+    /* Removed as requested for simple feel, or we can make it flat. Hiding to be safe on "no light effects" */
 }
 
 /* Header */
@@ -64,14 +51,17 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 2rem 9%;
-    background: rgba(15, 15, 26, 0.8);
-    backdrop-filter: blur(10px);
+    padding: 1.5rem 9%;
+    background: rgba(255, 255, 255, 0.95);
+    /* White background */
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
     transition: 0.3s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle dark border */
 }
 
 .logo {
@@ -105,7 +95,8 @@ body {
     left: 0;
     bottom: -6px;
     width: 0;
-    height: 2px;
+    height: 1px;
+    /* Thinner line */
     background: var(--main-color);
     transition: 0.3s;
 }
@@ -135,6 +126,8 @@ section {
 
 .heading .accent {
     color: var(--main-color);
+    font-weight: 400;
+    /* Less glowy */
 }
 
 /* Home */
@@ -173,38 +166,60 @@ section {
     width: 4rem;
     height: 4rem;
     background: transparent;
-    border: 0.2rem solid var(--main-color);
+    border: 1px solid var(--main-color);
     border-radius: 50%;
     font-size: 2rem;
     color: var(--main-color);
     margin: 3rem 1.5rem 3rem 0;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
+    /* Faster transition */
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: 1px solid rgba(26, 42, 58, 0.2);
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease;
 }
 
 .social-media a:hover {
-    background: var(--main-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 1rem var(--main-color);
+    background: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .btn {
     display: inline-block;
     padding: 1rem 2.8rem;
-    background: var(--main-color);
+    background: transparent;
     border-radius: 4rem;
-    box-shadow: 0 0 1rem var(--main-color);
+    box-shadow: none;
+    /* Removed glow */
     font-size: 1.6rem;
-    color: var(--bg-color);
+    color: var(--main-color);
     letter-spacing: 0.1rem;
     font-weight: 600;
-    transition: 0.5s ease;
+    border: 1px solid var(--main-color);
+    /* Thinner border */
+    transition: 0.3s ease;
+    text-shadow: none;
+    /* Removed glow */
 }
 
 .btn:hover {
     box-shadow: none;
-    background: transparent;
-    border: 2px solid var(--main-color);
-    color: var(--main-color);
+    background: var(--main-color);
+    color: #000;
+    text-shadow: none;
 }
 
 .home-img {
@@ -218,33 +233,44 @@ section {
 
 .glowing-circle {
     position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    width: 38vw;
+    /* Slightly larger for impact */
+    height: 38vw;
+    background: transparent;
+    /* Transparent background */
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.glowing-circle::after {
-    content: '';
-    position: absolute;
-    width: 38vw;
-    height: 38vw;
-    background: var(--main-color);
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    z-index: -1;
+    animation: blob 8s ease-in-out infinite;
+    overflow: hidden;
+    /* Clips image to blob */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .glowing-circle .image {
     position: relative;
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    /* Follows parent blob */
     overflow: hidden;
-    border: 0.2rem solid var(--main-color);
+    border: none;
+    box-shadow: none;
+}
+
+@keyframes blob {
+    0% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
 }
 
 .glowing-circle .image img {
@@ -263,11 +289,25 @@ section {
 }
 
 .about-img img {
-    width: 35vw;
-    border-radius: 2rem;
-    box-shadow: 0 0 2rem var(--main-color);
+    width: 26vw;
+    /* Adjusted for regular hexagon ratio (0.866:1) */
+    height: 30vw;
+    object-fit: cover;
+    object-position: center;
+    background: linear-gradient(135deg, #1c2532, #050505);
+    /* Smooth, minimal dark gradient */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    filter: contrast(1.08) brightness(1.01) drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+    /* Editorial finish, natural depth */
+    transition: 0.5s ease;
 }
 
+.about-img:hover img {
+    transform: scale(1.02);
+    /* filter: none; Remove any gold glow shadow */
+}
+
+/* About Content Restoration */
 .about-content h2 {
     text-align: left;
 }
@@ -282,45 +322,258 @@ section {
 }
 
 /* Skills */
-.skills h2 {
-    margin-bottom: 5rem;
+.skills {
+    text-align: center;
 }
 
+.skills h2 {
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.skills h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1rem;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: var(--main-color);
+    box-shadow: none;
+    /* Remove glow */
+    border-radius: 5px;
+}
+
+.skills {
+    padding-bottom: 1rem;
+    min-height: auto;
+}
+
+/* Skills Container (Horizontal Marquee) */
 .skills-container {
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    padding: 1rem 0 2rem;
+}
+
+.skills-track {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal */
     gap: 2rem;
+    width: max-content;
+    /* Allow full width */
+    max-width: none;
+    animation: horizontal-scroll 25s linear infinite;
+}
+
+/* Hover to pause */
+.skills-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes horizontal-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+        /* Scroll half width (one set) */
+    }
 }
 
 .skill-box {
-    flex: 1 1 20rem;
-    background: var(--second-bg-color);
-    padding: 3rem 2rem;
-    border-radius: 2rem;
+    flex: 0 0 22rem;
+    /* Reduced fixed width */
+    width: 22rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(26, 42, 58, 0.1);
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
     text-align: center;
-    border: 0.2rem solid var(--bg-color);
-    transition: 0.5s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(26, 42, 58, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-box::before {
+    display: none;
 }
 
 .skill-box:hover {
-    border-color: var(--main-color);
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    border-color: rgba(26, 42, 58, 0.2);
+    /* Subtle darkness instead of color */
+    box-shadow: 0 15px 30px rgba(26, 42, 58, 0.1);
+    /* Clean shadow, no neon */
 }
 
 .skill-box i {
-    font-size: 7rem;
+    font-size: 4rem;
+    color: var(--text-color);
+    /* Default neutral color */
+    margin-bottom: 1.5rem;
+    transition: 0.3s;
+    filter: none;
+    /* Remove glow */
+}
+
+.skill-box:hover i {
+    filter: none;
+    transform: scale(1.1);
+}
+
+/* Authentic Brand Colors */
+.fa-wordpress {
+    color: #21759b !important;
+}
+
+.fa-figma {
+    color: #F24E1E !important;
+}
+
+.fa-google {
+    color: #4285F4 !important;
+}
+
+.fa-linkedin-in {
+    color: #0077b5 !important;
+}
+
+.fa-github {
+    color: #333333 !important;
+}
+
+.fa-whatsapp {
+    color: #25D366 !important;
+}
+
+.fa-instagram {
+    color: #E1306C !important;
+}
+
+.fa-tiktok {
+    color: #000000 !important;
+}
+
+.fa-meta {
+    color: #0668E1 !important;
+}
+
+.fa-spotify {
+    color: #1DB954 !important;
+}
+
+.fa-amazon {
+    color: #FF9900 !important;
+}
+
+.fa-microsoft {
+    color: #00A4EF !important;
+}
+
+.fa-apple {
+    color: #000000 !important;
+}
+
+/* Service Icons (Generic) */
+.service-box i {
     color: var(--main-color);
+    /* Keep theme accent for generic icons or make them dark blue? User said "Restore... brand appearance". Generic icons don't have brand. I will match them to the text or secondary color. */
+    color: var(--text-color);
+}
+
+.service-box:hover i {
+    color: var(--main-color);
+    /* Highlight on hover */
 }
 
 .skill-box h3 {
-    font-size: 2rem;
-    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
+
+/* Skill box sliding animation */
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.skill-box {
+    animation: slideInFromLeft 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.skills .sub-heading {
+    margin: 4rem 0 3rem;
+    font-family: var(--font-secondary);
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.skill-box {
+    animation: slideInFromLeft 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.skill-box:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.skill-box:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.skill-box:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.skill-box:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.skill-box:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.skill-box:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.skill-box:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.skill-box:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
 
 /* Experience */
 .experience {
     background: var(--second-bg-color);
+    padding-top: 4rem;
+    /* Significantly reduced to close the gap */
+    min-height: auto;
 }
 
 .timeline {
@@ -384,16 +637,18 @@ section {
 
 .timeline-content {
     padding: 20px 30px;
-    background: var(--bg-color);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
     position: relative;
-    border-radius: 6px;
-    border: 1px solid var(--main-color);
-    box-shadow: 0 0 1rem rgba(0, 229, 255, 0.1);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
     transition: 0.3s;
 }
 
 .timeline-content:hover {
-    box-shadow: 0 0 2rem rgba(0, 229, 255, 0.3);
+    border-color: var(--main-color);
+    box-shadow: var(--glow-shadow);
 }
 
 .timeline-content h3 {
@@ -403,6 +658,96 @@ section {
 
 .timeline-content p {
     font-size: 1.5rem;
+}
+
+/* Clients */
+.clients {
+    background: var(--bg-color);
+    min-height: auto;
+    padding-bottom: 0;
+    /* Remove bottom padding */
+    padding-top: 5rem;
+    /* Reduce top padding if needed */
+}
+
+.clients h2 {
+    margin-bottom: 3rem;
+    /* Reduce heading margin */
+}
+
+.clients-container {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    padding: 2rem 0;
+}
+
+.clients-track {
+    display: flex;
+    gap: 4rem;
+    /* Spacing between logos */
+    width: max-content;
+    animation: clients-scroll 30s linear infinite;
+}
+
+/* Pause on hover */
+.clients-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes clients-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.333%);
+        /* Scroll 1/3 (one set of 3) */
+    }
+}
+
+.client-box {
+    flex: 0 0 15rem;
+    /* Fixed width, don't shrink */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 10rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(26, 42, 58, 0.1);
+    border-radius: 1.5rem;
+    box-shadow: 0 5px 15px rgba(26, 42, 58, 0.05);
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.client-box img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    opacity: 1;
+    transition: 0.3s;
+    filter: none;
+}
+
+.client-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--main-color);
+    box-shadow: 0 10px 25px rgba(26, 42, 58, 0.1);
+}
+
+.client-box:hover img {
+    transform: scale(1.1);
+}
+
+/* Invert specific white logos to be visible */
+.client-box img.invert-logo {
+    filter: invert(1) grayscale(100%);
 }
 
 /* Contact */
@@ -425,9 +770,20 @@ section {
     padding: 1.5rem;
     font-size: 1.6rem;
     color: var(--text-color);
-    background: var(--second-bg-color);
+    background: #FFFFFF;
+    /* High visibility background */
+    border: 1px solid rgba(26, 42, 58, 0.2);
+    /* Visible dark border */
     border-radius: .8rem;
     margin: .7rem 0;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(26, 42, 58, 0.05);
+}
+
+.contact form .input-box input:focus,
+.contact form textarea:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
 }
 
 .contact form .input-box input {
@@ -439,17 +795,26 @@ section {
 }
 
 /* Footer */
+/* Footer */
 .footer {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     padding: 2rem 9%;
     background: var(--second-bg-color);
 }
 
 .footer-text p {
     font-size: 1.6rem;
+    text-align: center;
+}
+
+.footer-iconTop {
+    position: absolute;
+    right: 9%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .footer-iconTop a {
@@ -480,15 +845,19 @@ section {
 
 @media (max-width: 991px) {
     .header {
-        padding: 2rem 3%;
+        padding: 2rem 5%;
     }
 
     section {
-        padding: 10rem 3% 2rem;
+        padding: 6rem 5% 2rem;
     }
 
     .footer {
-        padding: 2rem 3%;
+        padding: 2rem 5%;
+    }
+
+    .footer-iconTop {
+        right: 5%;
     }
 }
 
@@ -526,7 +895,7 @@ section {
         top: 100%;
         left: 0;
         width: 100%;
-        padding: 1rem 3%;
+        padding: 1rem 5%;
         background: var(--bg-color);
         border-top: .1rem solid rgba(0, 0, 0, .2);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
@@ -546,10 +915,12 @@ section {
 
     .home {
         flex-direction: column;
+        gap: 3rem;
     }
 
     .home-content {
         text-align: center;
+        margin-top: 2rem;
     }
 
     .home-content h3 {
@@ -561,9 +932,9 @@ section {
     }
 
     .home-img {
-        width: 70vw;
-        height: 70vw;
-        margin-top: 4rem;
+        width: 60vw;
+        height: 60vw;
+        margin-top: 2rem;
     }
 
     .social-media {
@@ -573,16 +944,12 @@ section {
     }
 
     .social-media a {
-        margin: 3rem 0;
-    }
-
-    .glowing-circle::after {
-        width: 75vw;
-        height: 75vw;
+        margin: 2.5rem 0;
     }
 
     .about {
         flex-direction: column-reverse;
+        gap: 4rem;
     }
 
     .about-content {
@@ -594,8 +961,10 @@ section {
     }
 
     .about-img img {
-        width: 70vw;
-        margin-top: 4rem;
+        width: 55vw;
+        height: 63.5vw;
+        /* Maintain hexagon aspect ratio */
+        margin-top: 2rem;
     }
 
     .timeline::after {
@@ -637,4 +1006,68 @@ section {
     .contact form .input-box input {
         width: 100%;
     }
+
+    .home-img {
+        width: 70vw;
+        height: 70vw;
+    }
+
+    .about-img img {
+        width: 70vw;
+        height: 81vw;
+        /* Maintain hexagon aspect ratio */
+    }
+}
+
+/* Services */
+.services h2 {
+    margin-bottom: 5rem;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.service-box {
+    flex: 1 1 28rem;
+    /* Optimized flexible width */
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+.service-box:hover {
+    transform: translateY(-10px);
+    border-color: rgba(26, 42, 58, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-box i {
+    font-size: 5rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-shadow: none;
+}
+
+.service-box h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-box p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Updated Skills Helpers */
+.sub-heading {
+    font-family: var(--font-secondary);
+    color: var(--text-color);
 }
